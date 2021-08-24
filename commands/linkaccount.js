@@ -21,23 +21,18 @@ module.exports = {
          max: 1, 
          time: 10000
       }).then(collected => {
+         
+         //console.log("Collected obj", collected.last().content)
 
-        
-         console.log(collected)
-         let collection = collect(collected.content)
-        
-         let input = message.split(" ")
+         let input = collected.last().content.split(" ")
          let user = input[0];
          let region = input[1];
          if(collected.first().content === "cancel"){
             return message.reply("Canceled!");
          }
          
-        
-        
-        
          axios.get
-         (`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/szebon4?api_key=RGAPI-0deb4faf-25ae-433e-82bd-a9d2e30f74fe`)
+         (`https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${user}?api_key=RGAPI-0deb4faf-25ae-433e-82bd-a9d2e30f74fe`)
          .then((response) => {
           let icon = response.data
           console.log(icon)
